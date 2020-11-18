@@ -38,7 +38,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: K2P-5.0
+        TNAME: R2100
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
@@ -98,17 +98,17 @@ jobs:
         sudo ./clear_tree
         sudo ./build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
-#    - name : Upload packages
-#      uses: actions/upload-artifact@master
-#      if: always()
-#      with:
-#        name: Padavan-packages
-#        path: /opt/images
-    - name: Upload binaries to release
-      uses: svenstaro/upload-release-action@v1-release
+    - name : Upload packages
+      uses: actions/upload-artifact@master
+      if: always()
       with:
-        repo_token: ${{ secrets.R_TOKEN }}
-        file: /opt/images/*.trx
-        tag: AtuoBuild
-        overwrite: true
-        file_glob: true
+        name: Padavan-packages
+        path: /opt/images
+#    - name: Upload binaries to release
+#      uses: svenstaro/upload-release-action@v1-release
+#      with:
+#        repo_token: ${{ secrets.R_TOKEN }}
+#        file: /opt/images/*.trx
+#        tag: AtuoBuild
+#        overwrite: true
+#        file_glob: true
